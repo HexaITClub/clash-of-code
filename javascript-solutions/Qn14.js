@@ -10,3 +10,6 @@ fs.readFile("coc.txt", "utf-8", (err, data) => {
 
   console.log(`The word "the" appears ${count} times in the file.`);
 });
+
+
+//Solution by Subedi Bibek
