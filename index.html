@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body
+            {
+                background-color: black;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            #container
+            {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+
+            #container div
+            {
+                position: relative;
+                top: 10%;
+            }
+
+            #question, #hint
+            {
+                font-weight: bold;
+                font-family: monospace;
+                font-size: 2.5em;
+                color: white;
+                display: inline-block;
+                width: 80%;
+            }
+
+            #hint
+            {
+                border: 2px solid purple;
+                margin-top: 20px;
+                border: 1px solid purple;
+            }
+
+            #timer-cd
+            {
+                color: white;
+                font-size: 64px;
+            }
+
+            .button-acts
+            {
+                margin-top: 10px;
+            }
+
+            .act-button
+            {
+                width: 200px;
+                height: 50px;
+                border: none;
+                background-color: lightgreen;
+                font-size: 24px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <div>
+                <div id="timer-container">
+                    <p id="timer-cd">
+                        00 : 00
+                    </p>
+                </div>
+                <div id="question-container">
+                    <span id="question">
+                    </span>
+                    <span id="hint">
+                    </p>
+                </div>
+            </div>
+            <div class="button-acts">
+                <button class="act-button" id="button-prev" onclick="previousQuestion();">Previous</button>
+                <button class="act-button" id="button-next" onclick="nextQuestion();">Next</button>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        const questions = [
+            {
+                time: 15 * 60,
+                question: "Write a function that takes string as input. This function should check if the given string is valid Nepali name. Nepali name generally consists of two or more words. Your function should return -1 if the given name is not proper Nepali name. Otherwise, it should return number of words in a given name.",
+                hint: "Use loops"
+            },
+            {
+                time: 1 * 60,
+                question: "Write a function to split string by spaces and print each word in new line. If the given string is empty, print \"[Empty]\".",
+                hint: "Use loops"
+            }
+        ];
+
+        var interval;
+        var questionIndex = 0;
+
+        changeQuestion();
+
+        function nextQuestion()
+        {
+            clearInterval(interval);
+            if(questionIndex >= questions.length) return;
+            questionIndex += 1;
+            changeQuestion();
+        }
+
+        function previousQuestion()
+        {
+            clearInterval(interval);
+            if(questionIndex == 0) return;
+            questionIndex -= 1;
+            changeQuestion();
+        }
+
+        function changeQuestion()
+        {
+            let totalTime = questions[questionIndex].time;
+            let timerCd = document.getElementById("timer-cd");
+            let question = document.getElementById("question");
+            let hint = document.getElementById("hint");
+
+            question.innerText = questions[questionIndex].question;
+            hint.innerText = `Hint: ${questions[questionIndex].hint}`;
+
+            interval = setInterval(() => {
+                let mints = totalTime / 60;
+                let secs = totalTime % 60;
+                timerCd.innerHTML = `${Math.trunc(mints)} : ${secs}`;
+
+                if(totalTime === 0)
+                {
+                    timerCd.style.color = "red";
+                    timerCd.innerHTML = "TIME'S UP";
+                    clearInterval(interval);
+                }
+                totalTime -= 1;
+            }, 1000);
+        }
+    </script>
+</html>
