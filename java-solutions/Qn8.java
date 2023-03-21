@@ -3,15 +3,16 @@ public class Qn8
     public static int validNepName(String name)
     {
         name = name.trim();
+        String[] arr = name.split(" ");
+        if(arr.length <= 1) return-1;
+
         int spaces = 0;
-        for(int i = 0; i < name.length(); i++)
+        for(String s: arr)
         {
-            if(name.charAt(i) == ' ')
+            if(!s.equals(" ") && !s.equals(""))
                 spaces++;
         }
-        if(spaces == 0)
-            return -1;
-        return spaces + 1;
+        return spaces;
     }
 
     public static void main(String[] args)
