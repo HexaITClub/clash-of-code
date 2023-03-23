@@ -1,24 +1,10 @@
-#!/usr/bin/env python3
+def round_to_nearest_integer(num):
+    return int(num + 0.5) if num >= 0 else int(num - 0.5)
 
-def valid_nep_name(name):
-    name = name.strip()
-    name_arr = name.split(" ")
-    if len(name_arr) == 1: return -1
+num = 5.67
+rounded_num = round_to_nearest_integer(num)
+print(rounded_num)  
 
-    spaces = 0
-    for c in name_arr:
-        if c == ' ' or c == '':
-            continue
-        else:
-            spaces += 1
-    if spaces == 0:
-        return -1
-    return spaces
-
-def main():
-    print(valid_nep_name("Ramesh   Poudel"))
-    print(valid_nep_name("RameshPoudel"))
-    print(valid_nep_name("Ramesh Poudel  "))
-    print(valid_nep_name(" Ramesh Poudel Prasad"))
-
-main()
+num = 4.34
+rounded_num = round_to_nearest_integer(num)
+print(rounded_num)  
