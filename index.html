@@ -34,6 +34,7 @@
 
             #hint
             {
+                width: 100%;
                 border: 2px solid purple;
                 margin-top: 20px;
                 border: 1px solid purple;
@@ -59,21 +60,69 @@
                 font-size: 24px;
                 cursor: pointer;
             }
+
+            #question-dropdown
+            {
+                display: inline-block;
+                width: 200px;
+                height: 50px;
+                border-radius: 8px;
+                border: 3px solid purple;
+            }
+
+            #question-dropdown option 
+            {
+                font-size: 24px;
+                font-family: sans-serif;
+                color: #0000;
+            }
+
+            optgroup
+            {
+                font-size: 24px;
+            }
+
+            #img-hint
+            {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                display: inline-block;
+                width: 500px;
+                height: 300px;
+            }
         </style>
     </head>
     <body>
         <div id="container">
             <div>
+                <div id="question-dropdown-container">
+                    <select id="question-dropdown">
+                        <optgroup>
+                        <option value="1">Question No. 1</option>
+                        <option value="2">Question No. 2</option>
+                        <option value="3">Question No. 3</option>
+                        <option value="4">Question No. 4</option>
+                        <option value="5">Question No. 5</option>
+                        <option value="6">Question No. 6</option>
+                        <option value="7">Question No. 7</option>
+                        <option value="8">Question No. 8</option>
+                        <option value="9">Question No. 9</option>
+                        <option value="10">Question No. 10</option>
+                        <option value="11">Question No. 11</option>
+                        <option value="12">Question No. 12</option>
+                        <option value="13">Question No. 13</option>
+                        <option value="14">Question No. 14</option>
+                        <option value="15">Question No. 15</option>
+                        </optgroup>
+                    </select>
+                </div>
                 <div id="timer-container">
-                    <p id="timer-cd">
-                        00 : 00
-                    </p>
+                    <p id="timer-cd"></p>
                 </div>
                 <div id="question-container">
-                    <span id="question">
-                    </span>
-                    <span id="hint">
-                    </p>
+                    <span id="question"></span>
+                    <span id="hint"></span>
+                    <img src="" alt="" id="img-hint">
                 </div>
             </div>
             <div class="button-acts">
@@ -84,16 +133,103 @@
     </body>
 
     <script>
+        var questionSelector = document.getElementById("question-dropdown");
+
         const questions = [
+            // phase 1
             {
+                type: "html",
+                time: 10 * 60,
+                question: "Achieve the following design using HTML and CSS",
+                hint: "./qn1.png"
+            },
+            {
+                type: "prog",
+                time: 10 * 60,
+                question: "Write a program that asks the user for their age and then calculates and prints the year they were born in.",
+                hint: "Use arithmetic operator(s)"
+            },
+            {
+                type: "prog",
+                time: 10 * 60,
+                question: "Prints the numbers from 1 to 100. But for multiples of three print 'Patan' instead of the number and for the multiples of five print 'Campus'. For numbers that are multiples of both three and five print 'BCA'.",
+                hint: "Use loops and mod arithmetic"
+            },
+            {
+                type: "html",
+                time: 10 * 60,
+                question: "Achieve the following design using HTML and CSS",
+                hint: "./qn4.png"
+            },
+            {
+                type: "prog",
+                time: 10 * 60,
+                question: "Write a function that accepts a string as input and calculate the length of given string. If the given string is NULL your function should return -1. Otherewise, it should return length of the string. Hint: Use loops.",
+                hint: "Use loops"
+            },
+
+            // phase 2
+            {
+                type: "html",
                 time: 15 * 60,
-                question: "Write a function that takes string as input. This function should check if the given string is valid Nepali name. Nepali name generally consists of two or more words. Your function should return -1 if the given name is not proper Nepali name. Otherwise, it should return number of words in a given name.",
+                question: "Create HTML code that generates a button and centers it both horizontally and vertically on the viewport's dimensions.",
+                hint: "./qn6.png"
+            },
+            {
+                type: "prog",
+                time: 15 * 60,
+                question: "Write a function to split string by spaces and print each word in new line. If the given string is empty, print \"[empty]\".",
                 hint: "Use loops"
             },
             {
-                time: 1 * 60,
-                question: "Write a function to split string by spaces and print each word in new line. If the given string is empty, print \"[Empty]\".",
+                type: "prog",
+                time: 15 * 60,
+                question: "Write a program to find the sum of all elements in an array that are not divisible by 3 or 7.",
                 hint: "Use loops"
+            },
+            {
+                type: "html",
+                time: 15 * 60,
+                question: "Create a rectangle using HTML SVG:",
+                hint: "./qn92.png"
+            },
+            {
+                type: "prog",
+                time: 15 * 60,
+                question: "Write a program to count the occurence of letter 'c' in a given string.",
+                hint: "Use loops and index"
+            },
+
+            // phase 3
+            {
+                type: "html",
+                time: 25 * 60,
+                question: "Write a html text to align two images horizontally",
+                hint: "./qn11.jpeg"
+            },
+            {
+                type: "prog",
+                time: 25 * 60,
+                question: "Program that takes in a string and returns True if the string is a valid palindrome if not  False.",
+                hint: "Use loops"
+            },
+            {
+                type: "prog",
+                time: 25 * 60,
+                question: "Given the integer number as argument, write a function that returns day of the week according to the number. If the number is less than 0, function should return Sunday. Or, if it is greater than 7, it should return Saturday. Otherwise, it should return name of the day with respect to given number. Hint: Use array.",
+                hint: "Use array"
+            },
+            {
+                type: "prog",
+                time: 25 * 60,
+                question: "Write a program to create a function that accepts two parameters - an array of integers and a number. The array can have any number of integers, including zero. The number parameter should be a positive integer. The function should calculate the sum of the individual digits of all the integers in the array. If the sum is greater than or equal to a number, the function should subtract the sum from the number and return the result. Otherwise, it should add the sum to the number and return the result.",
+                hint: "Use arrays and loops"
+            },
+            {
+                type: "prog",
+                time: 25 * 60,
+                question: "Write a program to find the sum of all elements in an array except for the largest and smallest elements.",
+                hint: "Use loops and array"
             }
         ];
 
@@ -107,6 +243,7 @@
             clearInterval(interval);
             if(questionIndex >= questions.length) return;
             questionIndex += 1;
+            questionSelector.selectedIndex = questionIndex;
             changeQuestion();
         }
 
@@ -115,23 +252,44 @@
             clearInterval(interval);
             if(questionIndex == 0) return;
             questionIndex -= 1;
+            questionSelector.selectedIndex = questionIndex;
             changeQuestion();
         }
 
         function changeQuestion()
         {
-            let totalTime = questions[questionIndex].time;
             let timerCd = document.getElementById("timer-cd");
-            let question = document.getElementById("question");
-            let hint = document.getElementById("hint");
+            timerCd.style.color = "white";
 
+            if(interval !== undefined)
+                clearInterval(interval);
+
+            let ques = questions[questionIndex];
+            let totalTime = questions[questionIndex].time;
+            let question = document.getElementById("question");
             question.innerText = questions[questionIndex].question;
-            hint.innerText = `Hint: ${questions[questionIndex].hint}`;
+
+            if(ques['type'] == "html")
+            {
+                let hint = document.getElementById("hint");
+                hint.style.display = "none";
+                let img = document.getElementById("img-hint");
+                img.style.display = "inline-block";
+                img.src = ques.hint;
+            }
+            else if(ques['type'] == "prog")
+            {
+                let hint = document.getElementById("hint");
+                hint.style.display = "block";
+                hint.innerText = `Hint: ${ques.hint}`;
+                let img = document.getElementById("img-hint");
+                img.style.display = "none";
+            }
 
             interval = setInterval(() => {
-                let mints = totalTime / 60;
+                let mints = Math.floor(totalTime / 60);
                 let secs = totalTime % 60;
-                timerCd.innerHTML = `${Math.trunc(mints)} : ${secs}`;
+                timerCd.innerHTML = mints + ' : ' + secs;
 
                 if(totalTime === 0)
                 {
@@ -142,5 +300,10 @@
                 totalTime -= 1;
             }, 1000);
         }
+
+        questionSelector.onchange = () => {
+            questionIndex = Number(questionSelector.options[questionSelector.selectedIndex].value) - 1;
+            changeQuestion();
+        };
     </script>
 </html>
